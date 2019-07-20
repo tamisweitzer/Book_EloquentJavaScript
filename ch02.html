@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Program Structure</title>
+</head>
+<body>
+<h1>Chapter 02</h1>
+
+<h2>Loop a Triangle</h2>
+  <script>
+    var str= "";
+    for (var i = 0; i < 7; i++) {
+      console.log(str += "#");
+    }
+
+    for (let line = "#"; line.length < 8; line += "#") {
+      console.log(line);
+    }
+  </script>
+
+
+<h2>FizzBuzz</h2>
+<script>
+// solution from me
+  for (var i = 1; i < 100; i++) {
+    if (i % 15 == 0) {
+      document.write('fizzbuzz <br>')
+    }
+    else if (i % 3 == 0) {
+      document.write('fizz <br>')
+    }
+    else if (i % 5 == 0) {
+      document.write('buzz <br>')
+    }
+    else {
+      document.writeln(i + "<br>")
+    }
+  }
+
+// solution from book
+  for (let n = 1; n <= 100; n++) {
+    let output = "";
+    if (n % 3 == 0) {
+      output += "Fizz";
+    }
+    if (n % 5 == 0) {
+      output += "Buzz"
+    }
+    console.log(output || n);
+  }
+</script>
+
+
+<h2>Chessboard</h2>
+<script>
+  let size = 8;
+  let board = "";
+
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      if ((x + y) % 2 == 0) {
+        board += " ";
+      } else {
+        board += "#";
+      }
+    }
+  board += "\n";
+  }
+
+  console.log(board);
+</script>
+
+</body>
+</html>

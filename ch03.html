@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Functions</title>
+</head>
+<body>
+
+<h2>Parameters and Scope</h2>
+<script>
+  // variables are global unless they are defined inside
+  // of a function. Variables inside a function are local
+  // only to that function
+  var outside = "outside";
+  function insidescope() {
+    var inside = "inside";
+    return inside;
+  }
+  console.log(outside);
+  console.log(insidescope());
+</script>
+
+<h2>Closure</h2>
+<script>
+  function wrapValue(n) {
+    var localVariable = n;
+    return function() {
+      return localVariable;
+    }
+  }
+  console.log(wrapValue(1));  // returns function
+
+  var wrap1 = wrapValue(2);
+  console.log(wrap1())  // returns 2
+
+
+  // another example of a Closure
+  function multiplier(factor) {
+    return function(number) {
+      return number * factor
+    }
+  }
+
+  var twice = multiplier(2);
+  console.log(twice);  // returns function
+  console.log(twice(5));  // returns 10
+</script>
+
+<h2>Recursion</h2>
+<script>
+  function power(base, exponent) {
+    if (exponent == 0) {
+      return 1;
+    } else {
+      return base * power(base, exponent - 1);
+    }
+  }
+
+  console.log(power(2, 3));
+
+  function findSolution(target) {
+    function find(start, history) {
+      if (start == target) {
+        return history;
+      } else if (start > target) {
+        return null
+      } else {
+        return find(start + 5, "(" + history + " + 5)") ||
+                   (start + 3, "(" + history +  " + 3)");
+      }
+    }
+    return find(1, "1");
+  }
+
+  console.log(findSolution(15));
+</script>
+
+
+<h2>Exercises</h2>
+<script>
+  // Minimum
+  function findMin(a, b) {
+    if (a < b) {
+      return a;
+    } else if (a > b ) {
+      return b;
+    } else {
+       return null;
+    }
+  }
+
+  console.log("Minimum, 2, 1: ", findMin(2, 1));
+  console.log("Minimum, 2, 2: ", findMin(2, 2));
+  console.log("Minimum, -1, 0: ", findMin(-1, ));
+
+  // Recursion
+  function isEven(n) {
+    if (n == 0) {
+      return ("n is even");
+    }
+    else if (n == 1) {
+      return ("n is odd");
+    }
+    else {
+      return isEven(n -2);
+    }
+  }
+  console.log(isEven(5));
+
+  // Bean Counting
+  //"string".charAt(n);  // returns a string of that character
+  function countBs(_str, _char) {
+    let str = _str,
+        char = _char,
+        count = 0;
+    for (var i = 0; i < str.length; i++) {
+      if (str.charAt(i) == char) {
+         console.log("found B at " + i);
+         count++;
+      } else {
+         console.log(char + " was not found");
+      }
+    }
+    console.log("The " + char + " was found " +  count + " times");
+  }
+
+  console.log(countBs("ddisihdhdfB", 'd'));
+</script>
+</body>
+</html>
