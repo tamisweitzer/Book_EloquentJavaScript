@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+
+  <script>
+    // Higher Order Functions
+    function greaterThan(n) {
+      return function(m) {
+        return m > n;
+      }
+    }
+
+    // By setting a variable to the outer function,
+    // you now have access to the inner function
+    // when you call it
+    var greaterThan10 = greaterThan(10);
+    console.log(greaterThan10(11));
+
+    // You can call the function directly, without having to first
+    // assign it to variable, by setting both parameters at time of called
+    greaterThan(1)(2);
+
+    console.log("1 for outer, 2 for inner", greaterThan(1)(2)); // true
+
+    // Functions that change other functions
+    function noisy(f) {
+      return function(arg) {
+        console.log("Calling with ", arg);
+        var val = f(arg)
+        console.log("called with ", arg, " - got ", val);
+        return val;
+      }
+    }
+
+    noisy(Boolean)(0);
+
+
+  </script>
+</body>
+</html>

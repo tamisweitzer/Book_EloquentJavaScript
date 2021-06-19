@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+
+  // The arguments object
+  // The function declaration does not take any arguments
+  function noArguments() {}
+  // Nonetheless, you can pass in arguments without causing an error
+  noArguments(1, 2, 3);
+
+  // Rework the addEntry() function to account for unknown number of arguments
+  // The function wants the boolean of squirrel at a minimum
+  // we then use the arguments object to loop over any additonal args
+  // passed in and add then to the events array
+  // when done, the entire entry is added to the journal 
+  function addEntry(squirrel) {
+    var entry = {
+      events: [],
+      squirrel: squirrel
+    };
+    for (var i = 1; i < arguments.length; i++) {
+      entry.events.push(arguments[i]);
+    }
+    journal.push(entry);
+  }
+
+  addEntry(true, 'work', 'touched tree', 'pizza', 'running', 'television');
+</script>
+</body>
+</html>

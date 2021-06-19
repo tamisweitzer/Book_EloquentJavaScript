@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Data Structures: Objects and Arrays</title>
+</head>
+<body>
+
+<script>
+  // Jacques journal as an object
+  var day1 = {
+    squirrel: false,
+    events: ["work", 'touched tree', 'pizza', 'running', 'television']
+  };
+
+  console.log(day1);
+  console.log(day1.squirrel);
+  console.log(day1.wolf);
+</script>
+
+<script>
+  // Redo Jacquesjournal as an array of objects
+  var journal_retired = [
+  {
+    events: ['work', 'touched tree', 'pizza', 'running', 'television'],
+    squirrel: false
+  },
+  {
+    events: ['work', 'ice cream', 'cauliflower', 'lasagna', 'touched tree', 'brushed teeth'],
+    squirrel: false
+  },
+  {
+    events: ['weekend', 'cycling', 'break', 'peanuts', 'beer'],
+    squirrel: true
+  }
+];
+</script>
+
+<script>
+  // Refactor the journal to make it better
+  var myjournal = [];
+
+  function addEntry(events, didITurnIntoASquirrel) {
+    myjournal.push(
+      {
+        events: events,
+        squirrel: didITurnIntoASquirrel
+      });
+  }
+
+  addEntry(['work', 'touched tree', 'pizza', 'running', 'television'], false);
+  addEntry(['work', 'ice cream', 'cauliflower', 'lasagna', 'touched tree', 'brushed teeth'], false);
+  addEntry(['weekend', 'cycling', 'break', 'peanuts', 'beer'], true);
+
+  // Table computes the phi coefficient from the data
+  // 00 => 0 => [no squirrel, no pizza] = 76
+  // 01 => 1 =>[no squirrel, yes pizza] = 9
+  // 10 => 2 => [yes squirrel, no pizza] = 4
+  // 11 => 3 => [yes squirrel, yes pizza] = 1
+
+  function phi(table) {
+    return (
+            (table[3] * table[0] - table[2] * table[1]) /
+            Math.sqrt( (table[2] + table[3]) *
+                       (table[0] + table[1]) *
+                       (table[1] + table[3]) *
+                       (table[0] + table[2]) ));
+  }
+
+  function hasEvent(event, entry) {
+    return entry.events.indexOf(event) != -1;
+  }
+
+  function tableFor(event, journal) {
+    var table = [0, 0, 0, 0];
+    for (var i = 0; i < journal.length; i++ ) {
+      var entry = journal[i],
+          index = 0;
+      if (hasEvent(event, entry)) {
+        index += 1;
+      }
+      if (entry.squirrel) {
+        index +=2
+      }
+      table[index] += 1;
+    }
+    return table;
+  }
+  console.log(phi([76, 9, 4, 1]));
+  console.log(tableFor('pizza', myjournal));
+  console.log(tableFor('squirrel', myjournal));
+
+  var map = {};
+  function storePhi(event, phi) {
+    map[event] = phi;
+  }
+
+  storePhi('pizza', 0.069);
+  storePhi('touched tree', -0.081);
+  console.log('pizza' in map);
+  console.log(map['touched tree'])
+
+  for (var event in map) {
+    console.log("The correlation for " + event + " is " + map[event]);
+  }
+
+  function gatherCorrelations(journal) {
+    var phis = {};
+    for (var entry = 0; entry < journal.length; entry++) {
+      var events = journal[entry].events;
+      for (var i = 0; i < events.length; i++) {
+        var event = events[i];
+        if (!(event in phis)) {
+          phis[event] = phi(tableFor(event, journal));
+        }
+      }
+    }
+  return phis;
+  }
+  var correlations = gatherCorrelations(myjournal);
+  console.log(correlations);
+
+  for (var i = 0; i < myjournal; i++) {
+    var entry = myjournal[i];
+    if (hasEvent('peanuts', entry) && !hasEvent('brushed teeth', entry)) {
+      entry.events.push('peanut teeth');
+    }
+  }
+  console.log(phi(tableFor('peanut teeth', myjournal)));
+
+</script>
+</body>
+</html>

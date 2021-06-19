@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  console.log('*** Adding and removing items from an array ***');
+    // Adding and Removing from an array
+
+    // Most common: push and pop
+    var arrStr = ['a', 'b', 'c', 'd'];
+    console.log(arrStr);
+
+    // Add an item to end of the array
+    arrStr.push('e');
+    console.log(arrStr);
+
+    // Remove an item from the end of the array
+    arrStr.pop('e');
+    console.log(arrStr);
+
+    // Less common: shift and unshift
+
+    // Add an item to the front of the array
+    arrStr.unshift('a');
+    console.log(arrStr);
+
+    // Remove an item from the front of the array
+    arrStr.shift('z');
+    console.log(arrStr);
+  </script>
+
+  <script>
+    console.log('*** .indexOf() and .lastIndexOf() methods ***');
+    var arr = [1, 2, 3, 4, 3, 2, 1 ];
+
+    // .indexOf(e) starts looking at position 0 and returns first index of e
+    arr.indexOf(3);  // 2 // index 2, where value '3' is located)
+
+    // .indexOf(e, n) starts from position n and returns first index of e
+    arr.indexOf(3, 3);  // 4 // position, or index, 4
+
+    // The .slice() method returns a new array containing only the
+    // values you sliced out of the original array
+    // arr.slice(start, end)
+    // slice will start at the start position and take everything
+    // up to, but not including, the end position
+    console.log("*** The .slice() method ***")
+    var sliceArray = ['a', 'b', 'c', 'd', 'e'];
+    console.log(sliceArray);
+    console.log(".slice(0, 3) => " + sliceArray.slice(0, 3));
+    console.log("Original array remained unchanged ", sliceArray);
+
+    console.log("sliceArray.slice(0, sliceArray.length - 2  returns: ", sliceArray.slice(0, sliceArray.length - 2));
+    console.log("Original array remained unchanged ", sliceArray);
+
+    // Starting and stopping at position 1 returns an empty array
+    console.log("sliceArray.slice(1,1) returns: ", sliceArray.slice(1,1));
+    // Starting and stopping at 2, 1 returns an empty array
+    console.log("sliceArray.slice(2,1) returns: ", sliceArray.slice(2,1));
+
+  </script>
+</body>
+</html>
